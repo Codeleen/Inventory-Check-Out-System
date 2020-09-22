@@ -23,16 +23,6 @@ public class CheckOutSystem extends Throwable {
 		allUsers = new HashMap<Consumer, Items>();
 	}
 
-	
-		
-	
-//	HashMap<Consumer, Items> allUsers = new HashMap<Consumer, Items>(){{
-//		Consumer titleC = new Consumer("Consumers", "", ":");
-//		Items titleI = new Items("Items:");
-//		
-//		put(titleC, titleI);
-//	}};
-
 	public void addUser(Scanner in) {
 		
 		System.out.println("User first and last name: ");
@@ -47,18 +37,21 @@ public class CheckOutSystem extends Throwable {
 		allUsers.put(newUser, theItems);
 		
 	}
-	
-	public void removeUser(String consumerToRemoveName) throws Exception{
-		 
-		for (Map.Entry<Consumer, Items> entry: allUsers.entrySet()) {
-			if (entry.getKey().getName().equalsIgnoreCase(consumerToRemoveName)){
-				allUsers.remove(entry);
+
+	public void removeUser(String consumerToRemoveName) throws Exception {
+
+		for (Map.Entry<Consumer, Items> entry : allUsers.entrySet()) {
+
+			if (entry.getKey().getName().equalsIgnoreCase(consumerToRemoveName)) {
+				if (entry.getValue() != null) {
+					allUsers.remove(entry);
+				} else {
+					throw new Exception("This user still has items checked out.");
+
+				}
+
 			}
 		}
-		
-		
-	
-		//if the user still has cheked out items, throw an error
 	}
 	
 	public void removeAllItemsOfUser( String consumerOfItemsToRemove) {
@@ -87,18 +80,16 @@ public class CheckOutSystem extends Throwable {
 		}
 		
 	}
-	
-	public Items seeItemsCheckedOut(String consumerToView ) {
-		for (Map.Entry<Consumer, Items> entry: allUsers.entrySet()) {
-			if (entry.getKey().getName().equalsIgnoreCase(consumerToView)){
+
+	public Items seeItemsCheckedOut(String consumerToView) {
+		for (Map.Entry<Consumer, Items> entry : allUsers.entrySet()) {
+			if (entry.getKey().getName().equalsIgnoreCase(consumerToView)) {
 				return entry.getValue();
 			}
-			 
-					
-				
-			}
+
+		}
 		return null;
-			
+
 	}
 	
 	
